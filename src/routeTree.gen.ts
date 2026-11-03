@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ButikenRouteImport } from './routes/butiken'
+import { Route as DuSomKundRouteImport } from './routes/du-som-kund'
+import { Route as KontaktaOssRouteImport } from './routes/kontakta-oss'
+import { Route as OmBergfeldsRouteImport } from './routes/om-bergfelds'
+import { Route as SortimentRouteImport } from './routes/sortiment'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ButikenRoute = ButikenRouteImport.update({
+  id: '/butiken',
+  path: '/butiken',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DuSomKundRoute = DuSomKundRouteImport.update({
+  id: '/du-som-kund',
+  path: '/du-som-kund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktaOssRoute = KontaktaOssRouteImport.update({
+  id: '/kontakta-oss',
+  path: '/kontakta-oss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OmBergfeldsRoute = OmBergfeldsRouteImport.update({
+  id: '/om-bergfelds',
+  path: '/om-bergfelds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SortimentRoute = SortimentRouteImport.update({
+  id: '/sortiment',
+  path: '/sortiment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/butiken': typeof ButikenRoute
+  '/du-som-kund': typeof DuSomKundRoute
+  '/kontakta-oss': typeof KontaktaOssRoute
+  '/om-bergfelds': typeof OmBergfeldsRoute
+  '/sortiment': typeof SortimentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/butiken': typeof ButikenRoute
+  '/du-som-kund': typeof DuSomKundRoute
+  '/kontakta-oss': typeof KontaktaOssRoute
+  '/om-bergfelds': typeof OmBergfeldsRoute
+  '/sortiment': typeof SortimentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/butiken': typeof ButikenRoute
+  '/du-som-kund': typeof DuSomKundRoute
+  '/kontakta-oss': typeof KontaktaOssRoute
+  '/om-bergfelds': typeof OmBergfeldsRoute
+  '/sortiment': typeof SortimentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/butiken'
+    | '/du-som-kund'
+    | '/kontakta-oss'
+    | '/om-bergfelds'
+    | '/sortiment'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/butiken'
+    | '/du-som-kund'
+    | '/kontakta-oss'
+    | '/om-bergfelds'
+    | '/sortiment'
+  id:
+    | '__root__'
+    | '/'
+    | '/butiken'
+    | '/du-som-kund'
+    | '/kontakta-oss'
+    | '/om-bergfelds'
+    | '/sortiment'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ButikenRoute: typeof ButikenRoute
+  DuSomKundRoute: typeof DuSomKundRoute
+  KontaktaOssRoute: typeof KontaktaOssRoute
+  OmBergfeldsRoute: typeof OmBergfeldsRoute
+  SortimentRoute: typeof SortimentRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/butiken': {
+      id: '/butiken'
+      path: '/butiken'
+      fullPath: '/butiken'
+      preLoaderRoute: typeof ButikenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/du-som-kund': {
+      id: '/du-som-kund'
+      path: '/du-som-kund'
+      fullPath: '/du-som-kund'
+      preLoaderRoute: typeof DuSomKundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakta-oss': {
+      id: '/kontakta-oss'
+      path: '/kontakta-oss'
+      fullPath: '/kontakta-oss'
+      preLoaderRoute: typeof KontaktaOssRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/om-bergfelds': {
+      id: '/om-bergfelds'
+      path: '/om-bergfelds'
+      fullPath: '/om-bergfelds'
+      preLoaderRoute: typeof OmBergfeldsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sortiment': {
+      id: '/sortiment'
+      path: '/sortiment'
+      fullPath: '/sortiment'
+      preLoaderRoute: typeof SortimentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ButikenRoute: ButikenRoute,
+  DuSomKundRoute: DuSomKundRoute,
+  KontaktaOssRoute: KontaktaOssRoute,
+  OmBergfeldsRoute: OmBergfeldsRoute,
+  SortimentRoute: SortimentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
