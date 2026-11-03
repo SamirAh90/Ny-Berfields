@@ -1,4 +1,5 @@
 # Bergfelds redesign
+- [ ] Recheck the uploaded original-content brief against the current site and retry original-source access, prioritizing Butiken.
 - [x] Inspect IGRAB design; use supplied Bergfelds facts and label unconfirmed visit details (live Bergfelds site blocks access).
 - [x] Replace placeholder identity and dark design with shared Bergfelds header, footer and light design.
 - [x] Build home, Sortiment, Butiken, Om Bergfelds, Du som kund and Kontakta oss pages.
