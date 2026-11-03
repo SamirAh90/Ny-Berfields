@@ -7,30 +7,164 @@ import plumbing from "@/assets/plumbing.jpg";
 import workshop from "@/assets/workshop.jpg";
 
 export const categories = [
-  { title: "Industri", image: industry, description: "Produkter och förnödenheter för verksamheter inom industrin." },
-  { title: "VVS", image: plumbing, description: "Din inköpskontakt för produkter och förnödenheter inom VVS." },
-  { title: "Verkstad", image: workshop, description: "Hjälp med inköp för verkstaden och den dagliga verksamheten." },
+  {
+    title: "Industri",
+    image: industry,
+    description: "Produkter och förnödenheter för verksamheter inom industrin.",
+  },
+  {
+    title: "VVS",
+    image: plumbing,
+    description: "Din inköpskontakt för produkter och förnödenheter inom VVS.",
+  },
+  {
+    title: "Verkstad",
+    image: workshop,
+    description: "Hjälp med inköp för verkstaden och den dagliga verksamheten.",
+  },
 ];
 
 export function CategoryGrid({ enquiry = false }: { enquiry?: boolean }) {
-  return <div><div className="grid gap-6 md:grid-cols-3">{categories.map((category) => <Link to={enquiry ? "/kontakta-oss" : "/sortiment"} search={enquiry ? { kategori: category.title } : {}} key={category.title} className="category-card group">
-    <div className="overflow-hidden"><img src={category.image} alt={`Illustrationsbild för ${category.title}, inte Bergfelds lager`} loading="lazy" width={1024} height={1024} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" /></div>
-    <div className="p-6"><div className="flex items-center justify-between"><h3 className="text-2xl font-bold">{category.title}</h3><ArrowUpRight className="size-5 text-primary" /></div><p className="mt-3 min-h-12 text-sm leading-relaxed text-muted-foreground">{category.description}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">{enquiry ? "Fråga oss" : "Utforska sortimentet"}<ArrowRight className="size-4" /></span></div>
-  </Link>)}</div><p className="mt-3 text-xs text-muted-foreground">Illustrationsbilder för våra verksamhetsområden. Kontakta oss för produkt- och sortimentsinformation.</p></div>;
+  return (
+    <div>
+      <div className="grid gap-6 md:grid-cols-3">
+        {categories.map((category) => (
+          <Link
+            to={enquiry ? "/kontakta-oss" : "/sortiment"}
+            search={enquiry ? { kategori: category.title } : {}}
+            key={category.title}
+            className="category-card group"
+          >
+            <div className="overflow-hidden">
+              <img
+                src={category.image}
+                alt={`Illustrationsbild för ${category.title}, inte Bergfelds lager`}
+                loading="lazy"
+                width={1024}
+                height={1024}
+                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold">{category.title}</h3>
+                <ArrowUpRight className="size-5 text-primary" />
+              </div>
+              <p className="mt-3 min-h-12 text-sm leading-relaxed text-muted-foreground">
+                {category.description}
+              </p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                {enquiry ? "Fråga oss" : "Utforska sortimentet"}
+                <ArrowRight className="size-4" />
+              </span>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <p className="mt-3 text-xs text-muted-foreground">
+        Illustrationsbilder för våra verksamhetsområden. Kontakta oss för produkt- och
+        sortimentsinformation.
+      </p>
+    </div>
+  );
 }
 
 export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
-  return <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-    <div><p className="eyebrow">BERGFELDS I LUDVIKA</p><h2 className="section-title mt-3">Välkommen att<br />höra av dig.</h2><p className="mt-5 max-w-lg leading-relaxed text-muted-foreground">Vi planerar och utvecklar vår butik. Ring eller mejla oss, så hjälper vi dig med dina inköp och med information inför ett besök.</p><div className="mt-7 flex flex-wrap gap-3"><Button asChild className="h-11 rounded-full px-6"><a href={business.directions} target="_blank" rel="noreferrer">Hitta hit <ArrowUpRight /></a></Button><Button asChild variant="outline" className="h-11 rounded-full px-6"><Link to="/kontakta-oss">Kontakta oss <ArrowRight /></Link></Button></div></div>
-    <div className="grid gap-7 border-t pt-7 lg:pt-0 lg:border-t-0">
-      <div className="flex gap-4"><MapPin className="mt-1 size-6 shrink-0 text-primary" /><div><h3 className="font-bold">Besöksadress</h3><p className="mt-2">Gatubacken 9, 771 42 Ludvika</p><p className="mt-2 text-sm text-muted-foreground">Publicerad tillfällig adress. Bekräfta aktuell adress med oss innan ditt besök.</p></div></div>
-      <div className="flex gap-4"><Clock className="mt-1 size-6 shrink-0 text-primary" /><div><h3 className="font-bold">Publicerade öppettider</h3><div className="mt-2 grid gap-1 text-sm">{business.hours.map(hour => <p key={hour}>{hour}</p>)}</div><p className="mt-2 text-sm text-muted-foreground">Kontakta oss för att bekräfta aktuella öppettider.</p></div></div>
-      <div className="flex gap-4"><Phone className="mt-1 size-6 shrink-0 text-primary" /><div><h3 className="font-bold">Vi hjälper dig gärna</h3><a href={business.phoneHref} className="mt-2 block text-primary">{business.phone}</a><a href={`mailto:${business.email}`} className="mt-1 block text-primary">{business.email}</a></div></div>
-      {detailed && <iframe title="Karta över publicerad besöksadress, Gatubacken 9 i Ludvika" src="https://maps.google.com/maps?q=Gatubacken%209%20Ludvika&output=embed" loading="lazy" referrerPolicy="no-referrer" className="h-64 w-full rounded-lg border" />}
+  return (
+    <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <p className="eyebrow">BERGFELDS I LUDVIKA</p>
+        <h2 className="section-title mt-3">
+          Välkommen att
+          <br />
+          höra av dig.
+        </h2>
+        <p className="mt-5 max-w-lg leading-relaxed text-muted-foreground">
+          Vi planerar och utvecklar vår butik. Ring eller mejla oss, så hjälper vi dig med dina
+          inköp och med information inför ett besök.
+        </p>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Button asChild className="h-11 rounded-full px-6">
+            <a href={business.directions} target="_blank" rel="noreferrer">
+              Hitta hit <ArrowUpRight />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="h-11 rounded-full px-6">
+            <Link to="/kontakta-oss">
+              Kontakta oss <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </div>
+      <div className="grid gap-7 border-t pt-7 lg:pt-0 lg:border-t-0">
+        <div className="flex gap-4">
+          <MapPin className="mt-1 size-6 shrink-0 text-primary" />
+          <div>
+            <h3 className="font-bold">Besöksadress</h3>
+            <p className="mt-2">Gatubacken 9, 771 42 Ludvika</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Publicerad tillfällig adress. Bekräfta aktuell adress med oss innan ditt besök.
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-4">
+          <Clock className="mt-1 size-6 shrink-0 text-primary" />
+          <div>
+            <h3 className="font-bold">Publicerade öppettider</h3>
+            <div className="mt-2 grid gap-1 text-sm">
+              {business.hours.map((hour) => (
+                <p key={hour}>{hour}</p>
+              ))}
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Kontakta oss för att bekräfta aktuella öppettider.
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-4">
+          <Phone className="mt-1 size-6 shrink-0 text-primary" />
+          <div>
+            <h3 className="font-bold">Vi hjälper dig gärna</h3>
+            <a href={business.phoneHref} className="mt-2 block text-primary">
+              {business.phone}
+            </a>
+            <a href={`mailto:${business.email}`} className="mt-1 block text-primary">
+              {business.email}
+            </a>
+          </div>
+        </div>
+        {detailed && (
+          <iframe
+            title="Karta över publicerad besöksadress, Gatubacken 9 i Ludvika"
+            src="https://maps.google.com/maps?q=Gatubacken%209%20Ludvika&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            className="h-64 w-full rounded-lg border"
+          />
+        )}
+      </div>
     </div>
-  </div>;
+  );
 }
 
-export function PageIntro({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
-  return <section className="bg-secondary py-16 md:py-20"><div className="site-container"><p className="eyebrow">{eyebrow}</p><h1 className="page-title mt-4">{title}</h1><p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">{description}</p></div></section>;
+export function PageIntro({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <section className="bg-secondary py-16 md:py-20">
+      <div className="site-container">
+        <p className="eyebrow">{eyebrow}</p>
+        <h1 className="page-title mt-4">{title}</h1>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      </div>
+    </section>
+  );
 }

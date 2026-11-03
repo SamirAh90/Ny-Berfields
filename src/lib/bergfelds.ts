@@ -20,20 +20,27 @@ export const navigation = [
 ] as const;
 
 export function pageHead(title: string, description: string) {
-  return { meta: [
-    { title: `${title} | Bergfelds i Ludvika` },
-    { name: "description", content: description },
-    { property: "og:title", content: `${title} | Bergfelds` },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { name: "twitter:card", content: "summary_large_image" },
-  ] };
+  return {
+    meta: [
+      { title: `${title} | Bergfelds i Ludvika` },
+      { name: "description", content: description },
+      { property: "og:title", content: `${title} | Bergfelds` },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  };
 }
 
 export type Enquiry = { description: string; name: string; company: string; contact: string };
 
 export function validateEnquiry(value: Enquiry): string | null {
-  if (!value.description.trim() || !value.name.trim() || !value.company.trim() || !value.contact.trim()) {
+  if (
+    !value.description.trim() ||
+    !value.name.trim() ||
+    !value.company.trim() ||
+    !value.contact.trim()
+  ) {
     return "Fyll i alla fält så att vi kan hjälpa dig vidare.";
   }
   const contact = value.contact.trim();

@@ -2,13 +2,19 @@ import { describe, expect, it } from "vitest";
 import { business, enquiryMailto, validateEnquiry } from "@/lib/bergfelds";
 
 describe("Bergfelds enquiry rules", () => {
-  const valid = { description: "VVS", name: "Testperson", company: "Testföretag", contact: "test@example.se" };
+  const valid = {
+    description: "VVS",
+    name: "Testperson",
+    company: "Testföretag",
+    contact: "test@example.se",
+  };
   it("addresses enquiries only to order@bergfelds.se", () => {
     expect(enquiryMailto(valid)).toMatch(/^mailto:order@bergfelds\.se\?/);
     expect(decodeURIComponent(enquiryMailto(valid))).toContain("Förfrågan: VVS");
   });
   it("requires all four enquiry fields", () => {
-    for (const key of Object.keys(valid)) expect(validateEnquiry({ ...valid, [key]: " " })).not.toBeNull();
+    for (const key of Object.keys(valid))
+      expect(validateEnquiry({ ...valid, [key]: " " })).not.toBeNull();
   });
   it("accepts email or phone and rejects invalid contact details", () => {
     expect(validateEnquiry(valid)).toBeNull();
