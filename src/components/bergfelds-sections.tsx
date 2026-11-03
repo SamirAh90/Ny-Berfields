@@ -13,7 +13,7 @@ export const categories = [
 ];
 
 export function CategoryGrid({ enquiry = false }: { enquiry?: boolean }) {
-  return <div><div className="grid gap-6 md:grid-cols-3">{categories.map((category, index) => <Link to={enquiry ? "/kontakta-oss" : "/sortiment"} search={enquiry ? { kategori: category.title } : undefined} key={category.title} className="category-card group">
+  return <div><div className="grid gap-6 md:grid-cols-3">{categories.map((category) => <Link to={enquiry ? "/kontakta-oss" : "/sortiment"} search={enquiry ? { kategori: category.title } : {}} key={category.title} className="category-card group">
     <div className="overflow-hidden"><img src={category.image} alt={`Illustrationsbild för ${category.title}, inte Bergfelds lager`} loading="lazy" width={1024} height={1024} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" /></div>
     <div className="p-6"><div className="flex items-center justify-between"><h3 className="text-2xl font-bold">{category.title}</h3><ArrowUpRight className="size-5 text-primary" /></div><p className="mt-3 min-h-12 text-sm leading-relaxed text-muted-foreground">{category.description}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">{enquiry ? "Fråga oss" : "Utforska sortimentet"}<ArrowRight className="size-4" /></span></div>
   </Link>)}</div><p className="mt-3 text-xs text-muted-foreground">Illustrationsbilder för våra verksamhetsområden. Kontakta oss för produkt- och sortimentsinformation.</p></div>;
