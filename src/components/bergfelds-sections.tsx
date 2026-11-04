@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { business } from "@/lib/bergfelds";
+import { originalContent } from "@/lib/original-content";
 import industry from "@/assets/industry.jpg";
 import plumbing from "@/assets/plumbing.jpg";
 import workshop from "@/assets/workshop.jpg";
@@ -79,10 +80,10 @@ export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
           <br />
           höra av dig.
         </h2>
-        <p className="mt-5 max-w-lg leading-relaxed text-muted-foreground">
-          Vi planerar och utvecklar vår butik. Ring eller mejla oss, så hjälper vi dig med dina
-          inköp och med information inför ett besök.
-        </p>
+        {(detailed ? originalContent.shop : originalContent.shop.slice(0, 1)).map((text) => (
+          <p key={text} className="mt-5 max-w-lg leading-relaxed text-muted-foreground">{text}</p>
+        ))}
+        {detailed && <div className="mt-7 flex aspect-[4/3] items-center justify-center border border-dashed bg-secondary p-8 text-center text-sm text-muted-foreground">Genuint foto från Bergfelds butik inväntas.</div>}
         <div className="mt-7 flex flex-wrap gap-3">
           <Button asChild className="h-11 rounded-full px-6">
             <a href={business.directions} target="_blank" rel="noreferrer">
@@ -90,8 +91,8 @@ export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
             </a>
           </Button>
           <Button asChild variant="outline" className="h-11 rounded-full px-6">
-            <Link to="/kontakta-oss">
-              Kontakta oss <ArrowRight />
+            <Link to={detailed ? "/kontakta-oss" : "/butiken"}>
+              {detailed ? "Kontakta oss" : "Läs mer om butiken"} <ArrowRight />
             </Link>
           </Button>
         </div>
@@ -101,7 +102,7 @@ export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
           <MapPin className="mt-1 size-6 shrink-0 text-primary" />
           <div>
             <h3 className="font-bold">Besöksadress</h3>
-            <p className="mt-2">Gatubacken 9, 771 42 Ludvika</p>
+            <p className="mt-2">{business.visitingAddress}</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Publicerad tillfällig adress. Bekräfta aktuell adress med oss innan ditt besök.
             </p>
@@ -131,8 +132,15 @@ export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
             <a href={`mailto:${business.email}`} className="mt-1 block text-primary">
               {business.email}
             </a>
+            {detailed && <p className="mt-3 text-sm text-muted-foreground">Övriga tider finns vi tillgängliga på; {business.email}</p>}
           </div>
         </div>
+        {detailed && (
+          <div>
+            <h3 className="font-bold">Postadress</h3>
+            <p className="mt-2 text-sm">{business.name}<br />{business.postalAddress}</p>
+          </div>
+        )}
         {detailed && (
           <iframe
             title="Karta över publicerad besöksadress, Gatubacken 9 i Ludvika"

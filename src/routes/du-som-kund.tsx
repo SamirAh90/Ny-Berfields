@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageIntro } from "@/components/bergfelds-sections";
 import { pageHead } from "@/lib/bergfelds";
+import { originalContent } from "@/lib/original-content";
 export const Route = createFileRoute("/du-som-kund")({
   head: () =>
     pageHead(
@@ -16,31 +17,12 @@ function Customers() {
     <>
       <PageIntro
         eyebrow="DIN VERKSAMHET I FOKUS"
-        title="Du som kund hos Bergfelds"
-        description="Personlig och välkomnande service, god produktkunskap och rimliga priser är en del av Bergfelds kundbemötande."
+        title="Du som kund"
+        description={originalContent.customers[0] ?? ""}
       />
       <section className="site-container section-space">
-        <div className="grid gap-8 md:grid-cols-3">
-          {[
-            {
-              t: "Personligt bemötande",
-              d: "Vi värdesätter kontakten med dig och vill förstå vad din verksamhet behöver.",
-            },
-            {
-              t: "Kunskap som hjälper",
-              d: "Produktkunskap och produktutbildning är en del av vårt arbete med kunderna.",
-            },
-            {
-              t: "En levande kundkontakt",
-              d: "Utställningar och kampanjer ingår i vår kundinformation. Kontakta oss för aktuella uppgifter.",
-            },
-          ].map((item, i) => (
-            <div key={item.t} className="border-t pt-6">
-              <span className="text-xs font-semibold text-primary">0{i + 1}</span>
-              <h2 className="mt-4 text-2xl font-bold">{item.t}</h2>
-              <p className="mt-4 leading-relaxed text-muted-foreground">{item.d}</p>
-            </div>
-          ))}
+        <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-muted-foreground">
+          {originalContent.customers.slice(1).map((text) => <p key={text}>{text}</p>)}
         </div>
         <div className="mt-14 flex flex-wrap items-center justify-between gap-6 border-t pt-9">
           <h2 className="text-2xl font-bold">Låt oss prata om ditt behov.</h2>

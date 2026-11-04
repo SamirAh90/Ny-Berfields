@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageIntro } from "@/components/bergfelds-sections";
 import { pageHead } from "@/lib/bergfelds";
+import { originalContent } from "@/lib/original-content";
+import founders from "@/assets/bergfelds-founders.jpg.asset.json";
 export const Route = createFileRoute("/om-bergfelds")({
   head: () =>
     pageHead(
@@ -17,23 +19,11 @@ function About() {
       <PageIntro
         eyebrow="MÄNNISKORNA BAKOM DIN INKÖPSKANAL"
         title="Om Bergfelds"
-        description="Ett företag byggt på kundrelationer, produktkunskap och personlig service."
+        description={originalContent.about[0] ?? ""}
       />
       <section className="site-container section-space grid gap-12 lg:grid-cols-2">
         <div>
-          <h2 className="section-title">
-            Två namn.
-            <br />
-            En gemensam idé.
-          </h2>
-          <p className="mt-6 leading-relaxed text-muted-foreground">
-            Bergfeld Försäljning AB grundades 2025 av Janne Bergkvist och Carin Riesenfeld. Namnet
-            Bergfelds förenar delar av deras efternamn.
-          </p>
-          <p className="mt-4 leading-relaxed text-muted-foreground">
-            Båda har lång erfarenhet av att bygga och vårda relationer med kunder och leverantörer.
-            Den erfarenheten tar de med sig in i Bergfelds.
-          </p>
+          <img src={founders.url} alt="Janne Bergkvist och Carin Riesenfeld, grundarna av Bergfelds" width={480} height={640} className="w-full max-w-md rounded-lg" />
           <Button asChild className="mt-7 rounded-full">
             <Link to="/kontakta-oss">
               Kontakta Jan och Carin <ArrowRight />
@@ -41,12 +31,11 @@ function About() {
           </Button>
         </div>
         <div>
-          <p className="eyebrow">VÅR AFFÄRSIDÉ</p>
-          <h2 className="mt-3 text-2xl font-bold">Produkter, förnödenheter och kunskap.</h2>
-          <p className="mt-5 leading-relaxed text-muted-foreground">
-            Vår affärsidé är att täcka kundernas behov genom försäljning, uthyrning och utbildning.
-            Kontakta oss och berätta vad din verksamhet behöver.
-          </p>
+          {originalContent.about.slice(1).map((text) => <p key={text} className="mb-5 leading-relaxed text-muted-foreground">{text}</p>)}
+          <div className="flex flex-wrap gap-5 text-sm font-semibold text-primary">
+            <a href="https://facebook.com/profile.php?id=61582548335301" target="_blank" rel="noreferrer">Facebook <ArrowRight className="inline size-4" /></a>
+            <a href="https://instagram.com/bergfelds_denlillagrossisten/" target="_blank" rel="noreferrer">Instagram <ArrowRight className="inline size-4" /></a>
+          </div>
           <div className="mt-8 grid gap-4 border-t pt-6">
             {["Glädje", "Service", "Kvalité"].map((value, i) => (
               <p
