@@ -15,7 +15,7 @@ function Butiken() {
       <PageIntro
         eyebrow="NÄRA DIG I LUDVIKA"
         title="Butiken"
-        description="Vi planerar och utvecklar vår butik. Här hittar du publicerad besöksinformation – ring oss gärna inför ditt besök."
+        description="Vi jobbar för fullt med planering och uppbyggnad av vår butik."
       />
       <section className="site-container section-space">
         <ShopInformation detailed />

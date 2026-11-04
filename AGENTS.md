@@ -12,3 +12,4 @@
 - Keep shared navigation and footer in the root layout, with a separate content route and unique head metadata per page, so links and page identity remain consistent.
 - Centralize business contact data and enquiry validation in the browser-safe business module; enquiries use an explicitly labeled mailto fallback until authorized delivery is configured, so no false delivery claims or personal-data storage are introduced.
 - Category images are generic illustrative media, never evidence of inventory or premises; do not reuse the previous fictional store image.
+- Keep transcribed primary-source paragraphs in the browser-safe original-content module and reuse them on the relevant pages, so full original wording remains available without duplicating long homepage copy.

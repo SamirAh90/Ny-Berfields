@@ -75,16 +75,13 @@ function Contact() {
               <p className="mt-3 text-sm leading-relaxed">
                 Bergfeld Försäljning AB
                 <br />
-                Ågårdsvägen 16
-                <br />
-                771 94 Ludvika
+                {business.postalAddress}
               </p>
             </div>
             <div>
               <h3 className="font-bold">Besöksadress</h3>
               <p className="mt-3 text-sm">
-                Gatubacken 9<br />
-                771 42 Ludvika
+                {business.visitingAddress}
               </p>
               <p className="mt-2 text-xs text-muted-foreground">
                 Publicerad tillfällig adress. Bekräfta med oss före besöket.

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { business, navigation } from "@/lib/bergfelds";
+import logo from "@/assets/bergfelds-logo.jpg.asset.json";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export function SiteHeader() {
           onClick={() => setOpen(false)}
           className="brand-wordmark"
         >
-          BERGFELDS<span>Din inköpskanal</span>
+          <img src={logo.url} alt="Bergfelds – Industri, VVS, Verkstad" width={272} height={136} className="h-14 w-28 object-contain" />
         </Link>
         <nav aria-label="Huvudnavigation" className="hidden items-center gap-5 xl:flex">
           {navigation.map((item) => (
@@ -92,7 +93,7 @@ export function SiteFooter() {
       <div className="site-container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr]">
         <div>
           <Link to="/" className="brand-wordmark">
-            BERGFELDS<span>Din inköpskanal</span>
+            <img src={logo.url} alt="Bergfelds – Industri, VVS, Verkstad" width={272} height={136} className="h-20 w-40 object-contain" />
           </Link>
           <p className="mt-5 text-sm text-muted-foreground">
             Industri – VVS – Verkstad
@@ -129,8 +130,7 @@ export function SiteFooter() {
         <div>
           <h2 className="footer-heading">Besök oss</h2>
           <p className="mt-4 text-sm">
-            Gatubacken 9<br />
-            771 42 Ludvika
+            {business.visitingAddress}
           </p>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
             Publicerad tillfällig besöksadress. Kontakta oss för aktuell adress och öppettider.
