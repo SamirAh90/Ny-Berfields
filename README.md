@@ -1,24 +1,9 @@
-# Done Bergfleds. satic
+# Bergfelds – statisk webbplats
 
-make a copy of this website https://www.igrab.se
+Webbplatsen använder endast HTML, CSS och JavaScript. Den har inga paket, ramverk eller byggsteg.
 
-This project was built with [Lovable](https://lovable.dev).
+Öppna `index.html` direkt i en webbläsare för att köra den lokalt. Webbplatsen består av sex HTML-sidor med gemensam design i `style.css` och funktionalitet i `main.js`.
 
-## Build with Lovable
+## GitHub Pages
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/306eebc8-ac55-4a7a-b4bb-e07d1e13323e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+Öppna **Settings → Pages**, välj **Deploy from a branch**, sedan `main` och `/ (root)`. Alla lokala resurser använder relativa sökvägar och fungerar därför även på en GitHub Pages-projektsida.
