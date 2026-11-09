@@ -106,7 +106,7 @@ function Contact() {
       <section className="site-container pb-16">
         <iframe
           title="Karta över publicerad besöksadress för Bergfelds"
-          src="https://maps.google.com/maps?q=Gatubacken%209%20Ludvika&output=embed"
+          src={`https://maps.google.com/maps?q=${encodeURIComponent(business.visitingAddress)}&output=embed`}
           loading="lazy"
           referrerPolicy="no-referrer"
           className="h-80 w-full rounded-lg border"
