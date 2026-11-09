@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -13,6 +14,10 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site-layout";
+import { SiteContentProvider } from "@/components/site-content-context";
+import { getSiteContent } from "@/lib/content.functions";
+import { supabase } from "@/integrations/supabase/client";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -75,6 +80,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: () => getSiteContent(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -121,14 +127,29 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const content = Route.useLoaderData();
+  const router = useRouter();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const chromeless = pathname.startsWith("/auth") || pathname.startsWith("/admin");
+
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((event) => {
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+      router.invalidate();
+    });
+    return () => data.subscription.unsubscribe();
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SiteHeader />
-      <main>
-        <Outlet />
-      </main>
-      <SiteFooter />
+      <SiteContentProvider content={content}>
+        {!chromeless && <SiteHeader />}
+        <main>
+          <Outlet />
+        </main>
+        {!chromeless && <SiteFooter />}
+      </SiteContentProvider>
+      <Toaster />
     </QueryClientProvider>
   );
 }
