@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { business, suppliers } from "@/lib/bergfelds";
-import { originalContent } from "@/lib/original-content";
+import { directionsUrl, phoneHref } from "@/lib/site-content";
+import { useSiteContent } from "@/components/site-content-context";
 import industry from "@/assets/industry.jpg";
 import plumbing from "@/assets/plumbing.jpg";
 import workshop from "@/assets/workshop.jpg";
@@ -71,6 +71,9 @@ export function CategoryGrid({ enquiry = false }: { enquiry?: boolean }) {
 }
 
 export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
+  const content = useSiteContent();
+  const business = content.business;
+  const shopText = content.pages.shop;
   return (
     <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
       <div>
@@ -80,13 +83,13 @@ export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
           <br />
           höra av dig.
         </h2>
-        {(detailed ? originalContent.shop : originalContent.shop.slice(0, 1)).map((text) => (
+        {(detailed ? shopText : shopText.slice(0, 1)).map((text) => (
           <p key={text} className="mt-5 max-w-lg leading-relaxed text-muted-foreground">{text}</p>
         ))}
         {detailed && <div className="mt-7 flex aspect-[4/3] items-center justify-center border border-dashed bg-secondary p-8 text-center text-sm text-muted-foreground">Genuint foto från Bergfelds butik inväntas.</div>}
         <div className="mt-7 flex flex-wrap gap-3">
           <Button asChild className="h-11 rounded-full px-6">
-            <a href={business.directions} target="_blank" rel="noreferrer">
+            <a href={directionsUrl(business.visitingAddress)} target="_blank" rel="noreferrer">
               Hitta hit <ArrowUpRight />
             </a>
           </Button>
@@ -126,7 +129,7 @@ export function ShopInformation({ detailed = false }: { detailed?: boolean }) {
           <Phone className="mt-1 size-6 shrink-0 text-primary" />
           <div>
             <h3 className="font-bold">Vi hjälper dig gärna</h3>
-            <a href={business.phoneHref} className="mt-2 block text-primary">
+            <a href={phoneHref(business.phone)} className="mt-2 block text-primary">
               {business.phone}
             </a>
             <a href={`mailto:${business.email}`} className="mt-1 block text-primary">
@@ -178,6 +181,7 @@ export function PageIntro({
 }
 
 export function SupplierMarquee() {
+  const { suppliers } = useSiteContent();
   const loop = [...suppliers, ...suppliers];
   return (
     <section className="border-y bg-card py-12" aria-labelledby="suppliers-title">

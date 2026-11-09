@@ -2,8 +2,10 @@ import { useState } from "react";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { enquiryMailto, validateEnquiry } from "@/lib/bergfelds";
+import { useSiteContent } from "@/components/site-content-context";
 
 export function EnquiryForm({ initialCategory = "" }: { initialCategory?: string }) {
+  const { business } = useSiteContent();
   const [error, setError] = useState<string | null>(null);
   const [opened, setOpened] = useState(false);
   return (
@@ -21,7 +23,7 @@ export function EnquiryForm({ initialCategory = "" }: { initialCategory?: string
         const problem = validateEnquiry(value);
         setError(problem);
         if (problem) return;
-        window.location.href = enquiryMailto(value);
+        window.location.href = enquiryMailto(value, business.email);
         setOpened(true);
       }}
       noValidate
@@ -79,7 +81,7 @@ export function EnquiryForm({ initialCategory = "" }: { initialCategory?: string
         Skicka förfrågan <ArrowUpRight />
       </Button>
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        Öppnar ditt e-postprogram med förfrågan till order@bergfelds.se. Du skickar mejlet där.
+        Öppnar ditt e-postprogram med förfrågan till {business.email}. Du skickar mejlet där.
       </p>
       {opened && (
         <p role="status" className="mt-3 text-sm text-primary">
