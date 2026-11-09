@@ -54,3 +54,12 @@ export function enquiryMailto(value: Enquiry) {
   const body = `Förfrågan: ${value.description.trim()}\n\nNamn: ${value.name.trim()}\nFöretag: ${value.company.trim()}\nKontakt: ${value.contact.trim()}`;
   return `mailto:${business.email}?subject=${encodeURIComponent("Produktförfrågan till Bergfelds")}&body=${encodeURIComponent(body)}`;
 }
+
+// Supplier brands confirmed by the owner (Samir Ahmad, 2026-11-05).
+export const suppliers = [
+  "Milwaukee", "HiKOKI", "Teng Tools", "SKF", "Bosch Professional", "Fischer", "Kemppi",
+  "Kärcher", "Scaldia", "Ejendals", "Guide", "Arbesko", "Sievi", "Portwest", "L.Brador",
+  "Cederroth", "Luna", "Hultafors", "Metabo", "Dormer Pramet", "Iscar", "Tyrolit",
+  "Arvid Nilsson", "Scanfast", "Linde / AGA", "tec7 / Relekta", "Habe Sealant", "CRC",
+  "Loctite", "Färgland", "Fiskars", "Mareld", "Stanley", "W-steps",
+];

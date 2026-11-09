@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { business } from "@/lib/bergfelds";
+import { business, suppliers } from "@/lib/bergfelds";
 import { originalContent } from "@/lib/original-content";
 import industry from "@/assets/industry.jpg";
 import plumbing from "@/assets/plumbing.jpg";
@@ -172,6 +172,28 @@ export function PageIntro({
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           {description}
         </p>
+      </div>
+    </section>
+  );
+}
+
+export function SupplierMarquee() {
+  const loop = [...suppliers, ...suppliers];
+  return (
+    <section className="border-y bg-card py-12" aria-labelledby="suppliers-title">
+      <div className="site-container mb-8">
+        <h2 id="suppliers-title" className="text-2xl font-bold">
+          Över 30 leverantörer i sortimentet
+        </h2>
+      </div>
+      <div className="marquee-mask">
+        <ul className="marquee-track">
+          {loop.map((name, i) => (
+            <li key={i} aria-hidden={i >= suppliers.length} className="marquee-item">
+              {name}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

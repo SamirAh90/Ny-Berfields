@@ -5,7 +5,7 @@ import hero from "@/assets/bergfelds-original-industry.jpg.asset.json";
 import { originalContent } from "@/lib/original-content";
 import { Button } from "@/components/ui/button";
 import { EnquiryForm } from "@/components/enquiry-form";
-import { CategoryGrid, ShopInformation } from "@/components/bergfelds-sections";
+import { CategoryGrid, ShopInformation, SupplierMarquee } from "@/components/bergfelds-sections";
 import { business, pageHead } from "@/lib/bergfelds";
 
 export const Route = createFileRoute("/")({
@@ -91,6 +91,7 @@ function Index() {
           </div>
         </div>
       </section>
+      <SupplierMarquee />
       <section className="section-space bg-primary text-primary-foreground">
         <div className="site-container grid gap-10 lg:grid-cols-2 lg:gap-24">
           <div>
