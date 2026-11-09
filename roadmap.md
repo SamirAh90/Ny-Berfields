@@ -6,5 +6,6 @@
 - [x] Add validated email-based enquiry fallback without pretending delivery or uploads.
 - [x] Check navigation, enquiries, factual rules and desktop/mobile presentation.
 - [x] Restore original logo, founders photo, homepage illustration and original product overview from Bergfelds.
+- [ ] Admin portal: Lovable Cloud backend, admin login, editable site content (texts, contact info, hours, suppliers, images) with public pages reading saved content.
 - [ ] Owner supplies genuine shop/premises photography; the original Butiken page only provides a stock image.
 - [ ] Before publication: owner confirms current visiting address and opening hours.

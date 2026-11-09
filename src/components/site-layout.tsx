@@ -2,11 +2,16 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { business, navigation } from "@/lib/bergfelds";
+import { navigation } from "@/lib/bergfelds";
+import { directionsUrl, phoneHref } from "@/lib/site-content";
+import { useSiteContent } from "@/components/site-content-context";
 import logo from "@/assets/bergfelds-logo.jpg.asset.json";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const content = useSiteContent();
+  const business = content.business;
+  const logoUrl = content.images.logo || logo.url;
   return (
     <header className="site-header">
       <div className="site-container flex h-[72px] items-center justify-between gap-4">
@@ -16,7 +21,7 @@ export function SiteHeader() {
           onClick={() => setOpen(false)}
           className="brand-wordmark"
         >
-          <img src={logo.url} alt="Bergfelds – Industri, VVS, Verkstad" width={272} height={136} className="h-14 w-28 object-contain" />
+          <img src={logoUrl} alt="Bergfelds – Industri, VVS, Verkstad" width={272} height={136} className="h-14 w-28 object-contain" />
         </Link>
         <nav aria-label="Huvudnavigation" className="hidden items-center gap-5 xl:flex">
           {navigation.map((item) => (
@@ -33,7 +38,7 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild className="hidden rounded-full font-semibold sm:inline-flex">
-            <a href={business.phoneHref}>
+            <a href={phoneHref(business.phone)}>
               <Phone />
               {business.phone}
             </a>
@@ -78,7 +83,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <a href={business.phoneHref} className="px-3 py-3 text-primary">
+          <a href={phoneHref(business.phone)} className="px-3 py-3 text-primary">
             {business.phone}
           </a>
         </nav>
@@ -88,12 +93,15 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
+  const content = useSiteContent();
+  const business = content.business;
+  const logoUrl = content.images.logo || logo.url;
   return (
     <footer className="border-t bg-card">
       <div className="site-container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr]">
         <div>
           <Link to="/" className="brand-wordmark">
-            <img src={logo.url} alt="Bergfelds – Industri, VVS, Verkstad" width={272} height={136} className="h-20 w-40 object-contain" />
+            <img src={logoUrl} alt="Bergfelds – Industri, VVS, Verkstad" width={272} height={136} className="h-20 w-40 object-contain" />
           </Link>
           <p className="mt-5 text-sm text-muted-foreground">
             Industri – VVS – Verkstad
@@ -114,7 +122,7 @@ export function SiteFooter() {
         <div>
           <h2 className="footer-heading">Hör av dig</h2>
           <div className="mt-4 grid gap-3 text-sm">
-            <a href={business.phoneHref} className="flex items-center gap-2 hover:text-primary">
+            <a href={phoneHref(business.phone)} className="flex items-center gap-2 hover:text-primary">
               <Phone className="size-4" />
               {business.phone}
             </a>
@@ -136,7 +144,7 @@ export function SiteFooter() {
             Publicerad tillfällig besöksadress. Kontakta oss för aktuell adress och öppettider.
           </p>
           <a
-            href={business.directions}
+            href={directionsUrl(business.visitingAddress)}
             target="_blank"
             rel="noreferrer"
             className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary"

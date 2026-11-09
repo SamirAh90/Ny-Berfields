@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryGrid, PageIntro } from "@/components/bergfelds-sections";
+import { useSiteContent } from "@/components/site-content-context";
 import { pageHead } from "@/lib/bergfelds";
 import overview from "@/assets/bergfelds-product-overview.jpg.asset.json";
 export const Route = createFileRoute("/sortiment")({
@@ -11,16 +12,17 @@ export const Route = createFileRoute("/sortiment")({
   component: Sortiment,
 });
 function Sortiment() {
+  const content = useSiteContent();
   return (
     <>
       <PageIntro
         eyebrow="INDUSTRI – VVS – VERKSTAD"
         title="Vårt sortiment"
-        description="Vi hjälper företagskunder med produkter och förnödenheter inom våra tre huvudområden – och kan även hjälpa till med andra produktgrupper."
+        description={content.pages.sortimentIntro}
       />
       <section className="site-container section-space">
         <CategoryGrid enquiry />
-        <img src={overview.url} alt="Bergfelds originalöversikt: kullager, VVS, kyla, infästning, tätningar, drivremmar, mark och VA, smörjmedel, tryckluft, verktyg, svets samt kap och slip" width={1280} height={720} loading="lazy" className="mt-12 h-auto w-full rounded-lg" />
+        <img src={content.images.overview || overview.url} alt="Bergfelds originalöversikt: kullager, VVS, kyla, infästning, tätningar, drivremmar, mark och VA, smörjmedel, tryckluft, verktyg, svets samt kap och slip" width={1280} height={720} loading="lazy" className="mt-12 h-auto w-full rounded-lg" />
         <div className="mt-12 border-t pt-8">
           <h2 className="text-2xl font-bold">Ditt behov är vår utgångspunkt.</h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">

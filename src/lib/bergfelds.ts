@@ -50,9 +50,9 @@ export function validateEnquiry(value: Enquiry): string | null {
   return null;
 }
 
-export function enquiryMailto(value: Enquiry) {
+export function enquiryMailto(value: Enquiry, email: string = business.email) {
   const body = `Förfrågan: ${value.description.trim()}\n\nNamn: ${value.name.trim()}\nFöretag: ${value.company.trim()}\nKontakt: ${value.contact.trim()}`;
-  return `mailto:${business.email}?subject=${encodeURIComponent("Produktförfrågan till Bergfelds")}&body=${encodeURIComponent(body)}`;
+  return `mailto:${email}?subject=${encodeURIComponent("Produktförfrågan till Bergfelds")}&body=${encodeURIComponent(body)}`;
 }
 
 // Supplier brands confirmed by the owner (Samir Ahmad, 2026-11-05).

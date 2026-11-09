@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, ArrowUpRight } from "lucide-react";
 import { PageIntro } from "@/components/bergfelds-sections";
 import { EnquiryForm } from "@/components/enquiry-form";
-import { business, pageHead } from "@/lib/bergfelds";
+import { useSiteContent } from "@/components/site-content-context";
+import { directionsUrl, phoneHref } from "@/lib/site-content";
+import { business as staticBusiness, pageHead } from "@/lib/bergfelds";
 export const Route = createFileRoute("/kontakta-oss")({
   validateSearch: (search: Record<string, unknown>): { kategori?: string } => {
     const category = search["kategori"];
@@ -19,20 +21,22 @@ export const Route = createFileRoute("/kontakta-oss")({
 });
 function Contact() {
   const { kategori } = Route.useSearch();
+  const content = useSiteContent();
+  const business = content.business;
   return (
     <>
       <PageIntro
         eyebrow="VI HJÄLPER DIG GÄRNA"
         title="Kontakta oss"
-        description="En fråga, ett inköpsbehov eller något du inte hittar? Ring eller mejla oss."
+        description={content.pages.kontaktIntro}
       />
       <section className="site-container section-space grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
           <h2 className="text-2xl font-bold">Bergfeld Försäljning AB</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Org.nr {business.organisationNumber}</p>
+          <p className="mt-2 text-sm text-muted-foreground">Org.nr {staticBusiness.organisationNumber}</p>
           <div className="my-6 grid gap-3">
             <a
-              href={business.phoneHref}
+              href={phoneHref(business.phone)}
               className="flex items-center gap-3 text-lg font-semibold text-primary"
             >
               <Phone className="size-5" />
@@ -87,7 +91,7 @@ function Contact() {
                 Publicerad tillfällig adress. Bekräfta med oss före besöket.
               </p>
               <a
-                href={business.directions}
+                href={directionsUrl(business.visitingAddress)}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-3 flex items-center gap-2 text-sm font-semibold text-primary"
@@ -102,7 +106,7 @@ function Contact() {
       <section className="site-container pb-16">
         <iframe
           title="Karta över publicerad besöksadress för Bergfelds"
-          src="https://maps.google.com/maps?q=Gatubacken%209%20Ludvika&output=embed"
+          src={`https://maps.google.com/maps?q=${encodeURIComponent(business.visitingAddress)}&output=embed`}
           loading="lazy"
           referrerPolicy="no-referrer"
           className="h-80 w-full rounded-lg border"

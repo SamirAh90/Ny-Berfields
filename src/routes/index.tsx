@@ -2,11 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Phone } from "lucide-react";
 import hero from "@/assets/bergfelds-original-industry.jpg.asset.json";
-import { originalContent } from "@/lib/original-content";
 import { Button } from "@/components/ui/button";
 import { EnquiryForm } from "@/components/enquiry-form";
 import { CategoryGrid, ShopInformation, SupplierMarquee } from "@/components/bergfelds-sections";
-import { business, pageHead } from "@/lib/bergfelds";
+import { useSiteContent } from "@/components/site-content-context";
+import { phoneHref } from "@/lib/site-content";
+import { pageHead } from "@/lib/bergfelds";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -18,11 +19,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const content = useSiteContent();
+  const business = content.business;
   return (
     <>
       <section className="hero">
         <img
-          src={hero.url}
+          src={content.images.hero || hero.url}
           alt="Illustrativ industribild från Bergfelds originalwebbplats, inte ett foto av deras lokaler"
           width={1536}
           height={1024}
@@ -32,14 +35,14 @@ function Index() {
         <div className="site-container hero-inner">
           <div className="text-hero-foreground">
             <p className="mb-6 text-xs font-semibold text-hero-muted">INDUSTRI – VVS – VERKSTAD</p>
-            <h1 className="hero-title">BERGFELDS</h1>
-            <p className="mt-2 text-4xl font-medium leading-tight md:text-5xl">Din inköpskanal.</p>
+            <h1 className="hero-title">{content.hero.title}</h1>
+            <p className="mt-2 text-4xl font-medium leading-tight md:text-5xl">{content.hero.tagline}</p>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-hero-muted">
-              {originalContent.home[0]}
+              {content.hero.intro}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild className="h-12 rounded-full px-6 font-semibold">
-                <a href={business.phoneHref}>
+                <a href={phoneHref(business.phone)}>
                   <Phone />
                   Ring {business.phone}
                 </a>
@@ -66,7 +69,7 @@ function Index() {
               <p className="eyebrow">VÅRA VERKSAMHETSOMRÅDEN</p>
               <h2 className="section-title mt-3">Vad behöver din verksamhet?</h2>
               <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
-                {originalContent.home[1]}
+                {content.home.categoriesLead}
               </p>
             </div>
             <Button asChild variant="link" className="px-0">
@@ -104,7 +107,7 @@ function Index() {
               Från första frågan.
             </h2>
             <p className="mt-5 max-w-md leading-relaxed text-primary-foreground/85">
-              {originalContent.customers[0]}
+              {content.home.serviceText}
             </p>
             <Button
               asChild
@@ -117,7 +120,7 @@ function Index() {
             </Button>
           </div>
           <div>
-            {originalContent.customers.slice(1, 3).map((text) => <p key={text} className="border-b border-primary-foreground/25 py-5 leading-relaxed first:pt-0">{text}</p>)}
+            {content.pages.customers.slice(1, 3).map((text) => <p key={text} className="border-b border-primary-foreground/25 py-5 leading-relaxed first:pt-0">{text}</p>)}
           </div>
         </div>
       </section>
@@ -132,7 +135,7 @@ function Index() {
             <p className="eyebrow">GLÄDJE · SERVICE · KVALITÉ</p>
             <h2 className="section-title mt-3">Om Bergfelds</h2>
             <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
-              {originalContent.about[0]}
+              {content.home.aboutTeaser}
             </p>
           </div>
           <Button asChild className="h-12 rounded-full px-7">

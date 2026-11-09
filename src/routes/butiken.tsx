@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageIntro, ShopInformation } from "@/components/bergfelds-sections";
+import { useSiteContent } from "@/components/site-content-context";
 import { pageHead } from "@/lib/bergfelds";
 export const Route = createFileRoute("/butiken")({
   head: () =>
@@ -10,12 +11,13 @@ export const Route = createFileRoute("/butiken")({
   component: Butiken,
 });
 function Butiken() {
+  const content = useSiteContent();
   return (
     <>
       <PageIntro
         eyebrow="NÄRA DIG I LUDVIKA"
         title="Butiken"
-        description="Vi jobbar för fullt med planering och uppbyggnad av vår butik."
+        description={content.pages.butikenIntro}
       />
       <section className="site-container section-space">
         <ShopInformation detailed />
