@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "426ef313-13f0-4d95-bbc2-c94e41d7849e",
-  "project_id": "89e1db19-aedb-42f7-a5a2-77f214a6da5f",
-  "url": "/__l5e/assets-v1/426ef313-13f0-4d95-bbc2-c94e41d7849e/bergfelds-product-overview.jpg",
-  "r2_key": "a/v1/89e1db19-aedb-42f7-a5a2-77f214a6da5f/426ef313-13f0-4d95-bbc2-c94e41d7849e/bergfelds-product-overview.jpg",
-  "original_filename": "bergfelds-product-overview.jpg",
-  "size": 69870,
   "content_type": "image/jpeg",
-  "created_at": "2026-11-04T13:24:34Z"
+  "created_at": "2026-11-04T13:24:34Z",
+  "original_filename": "bergfelds-product-overview.jpg",
+  "project_id": "306eebc8-ac55-4a7a-b4bb-e07d1e13323e",
+  "r2_key": "a/v1/306eebc8-ac55-4a7a-b4bb-e07d1e13323e/426ef313-13f0-4d95-bbc2-c94e41d7849e/bergfelds-product-overview.jpg",
+  "size": 69870,
+  "url": "/__l5e/assets-v1/426ef313-13f0-4d95-bbc2-c94e41d7849e/bergfelds-product-overview.jpg",
+  "version": 1
 }
